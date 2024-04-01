@@ -68,15 +68,37 @@
 }
 .paginationBttns {
   width: 50px;
+  border: 1px solid #0c1cf2;
   background-color: #42c2ff;
 }
-.btn {
+/* .btn {
   display: flex;
   gap: 0.3%;
+} */
+
+.pagination .selected {
+  width: 20px;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #0c1cf2;
 }
+.pagination li {
+  width: 20px;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #0c1cf2;
+  color: white;
+  border: 1px solid #0c1cf2;
+}
+
 /* Delete Selected  */
 .deleteSelectedButton {
-  position: absolute;
   background-color: #dc3545;
   color: white;
   border: none;
@@ -90,8 +112,19 @@
   background-color: #c82333;
 }
 .footer {
+  width: 100%;
+  margin-bottom: 30px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: row-reverse;
+}
+.icon {
+  border: none;
+  color: #c82333;
+  background-color: none;
+}
+.icon:hover {
+  scale: 1.2;
 }

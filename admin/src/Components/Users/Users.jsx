@@ -36,6 +36,11 @@ const Users = () => {
     setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
   };
 
+  const handleDeleteSelected = () => {
+    setUsers(users.filter((user) => !selectedRows.includes(user.id)));
+    setSelectedRows([]);
+  };
+
   const handleEdit = (id) => {};
 
   const handleSearch = (e) => {
@@ -128,14 +133,11 @@ const Users = () => {
               <td className={styles.btn}>
                 <button
                   onClick={() => handleEdit(user.id)}
-                  className={styles.editButton}
+                  className={styles.icon}
                 >
                   <AiFillEdit />
                 </button>
-                <button
-                  onClick={() => handleDelete(user.id)}
-                  className={styles.deleteButton}
-                >
+                <button onClick={handleDeleteSelected} className={styles.icon}>
                   <AiFillDelete />
                 </button>
               </td>
@@ -157,15 +159,13 @@ const Users = () => {
             previousLabel={"Prev"}
             nextLabel={"Next"}
           />
-          <button
-            onClick={() => {
-              setSelectedRows([]);
-            }}
-            className={styles.deleteSelectedButton}
-          >
-            Delete Selected
-          </button>
         </div>
+        <button
+          onClick={handleDeleteSelected}
+          className={styles.deleteSelectedButton}
+        >
+          Delete Selected
+        </button>
       </div>
     </div>
   );
