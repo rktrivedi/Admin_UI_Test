@@ -4,12 +4,15 @@ import {AiFillDelete, AiFillEdit} from "react-icons/ai";
 import {FaSearch} from "react-icons/fa";
 import {useParams} from "react-router-dom";
 import styles from "./Users.module.css";
+import Pagination from "../Paginate/Paginate";
+import Search from "../Search/Search";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [editedUser, setEditedUser] = useState(null);
 
   const {id} = useParams();
   const itemsPerPage = 10;
@@ -41,10 +44,41 @@ const Users = () => {
     setSelectedRows([]);
   };
 
-  const handleEdit = (id) => {};
+  const handleEdit = (id, updatedUserData) => {
+    const userToEdit = users.find((user) => user.id === id);
+    setEditedUser(userToEdit);
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
+    const userIndex = users.findIndex((user) => user.id === id);
+
+    if (userIndex !== -1) {
+      const updatedUsers = [...users];
+      updatedUsers[userIndex] = {
+        ...updatedUsers[userIndex],
+        ...updatedUserData,
+      };
+
+      setUsers(updatedUsers);
+
+      setEditedUser(updatedUsers[userIndex]);
+    }
+  };
+
+  const handleUserUpdate = () => {
+    const userIndex = users.findIndex((user) => user.id === editedUser.id);
+
+    if (userIndex !== -1) {
+      const updatedUsers = [...users];
+      updatedUsers[userIndex] = editedUser;
+
+      console.log("Updated user details:", editedUser);
+
+      setUsers(updatedUsers);
+      setEditedUser(null);
+    }
+  };
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
     setCurrentPage(0);
   };
 
@@ -90,15 +124,7 @@ const Users = () => {
       <h1>Admin UI</h1>
       <br />
       <div className={styles.searchContainer}>
-        <input
-          className={styles.searchBar}
-          type="text"
-          name="name"
-          placeholder="Search by any field"
-          value={searchQuery}
-          onChange={handleSearch}
-        />
-        <FaSearch className={styles.searchIcon} />
+        <Search onSearch={handleSearch} />
       </div>
 
       <table className={styles.table}>
@@ -137,27 +163,54 @@ const Users = () => {
                 >
                   <AiFillEdit />
                 </button>
-                <button onClick={handleDeleteSelected} className={styles.icon}>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className={styles.icon}
+                >
                   <AiFillDelete />
                 </button>
               </td>
             </tr>
           ))}
+          {/* Modal for editing user details */}
+          {editedUser && (
+            <div className={styles.modal}>
+              <h2>Edit User</h2>
+              <input
+                type="text"
+                value={editedUser.name}
+                onChange={(e) =>
+                  setEditedUser({...editedUser, name: e.target.value})
+                }
+              />
+              <input
+                type="email"
+                value={editedUser.email}
+                onChange={(e) =>
+                  setEditedUser({...editedUser, email: e.target.value})
+                }
+              />
+              <input
+                type="text"
+                value={editedUser.role}
+                onChange={(e) =>
+                  setEditedUser({...editedUser, role: e.target.value})
+                }
+              />
+              <button onClick={handleUserUpdate}>Update</button>
+              <button onClick={() => setEditedUser(null)}>Cancel</button>
+            </div>
+          )}
         </tbody>
       </table>
       <br />
       <br />
       <div className={styles.footer}>
         <div className={styles.paginationContainer}>
-          <ReactPaginate
+          <Pagination
             pageCount={pageCount}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={2}
             onPageChange={handlePageChange}
-            containerClassName={styles.pagination}
-            activeClassName={styles.activePage}
-            previousLabel={"Prev"}
-            nextLabel={"Next"}
+            currentPage={currentPage}
           />
         </div>
         <button

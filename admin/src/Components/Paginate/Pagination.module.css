@@ -1,0 +1,40 @@
+.paginationContainer {
+  display: flex;
+  flex-direction: column;
+}
+.pagination {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  gap: 2%;
+  text-decoration: none;
+  list-style: none;
+  margin: auto;
+  cursor: pointer;
+}
+.paginationBttns {
+  width: 50px;
+  border: 1px solid #0c1cf2;
+  background-color: #42c2ff;
+}
+.pagination .selected {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid #0c1cf2;
+}
+.pagination li {
+  width: 20px;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #0c1cf2;
+  color: white;
+  border: 1px solid #0c1cf2;
+}
