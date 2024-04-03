@@ -47,13 +47,15 @@
   background-color: #c82333;
 }
 .footer {
-  width: 100%;
+  padding: 0 20px;
+  width: 85%;
   margin-bottom: 30px;
   height: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row-reverse;
+  gap: 250px;
 }
 .icon {
   border: none;

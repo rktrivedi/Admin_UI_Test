@@ -69,7 +69,6 @@ const Users = () => {
     if (userIndex !== -1) {
       const updatedUsers = [...users];
       updatedUsers[userIndex] = editedUser;
-
       console.log("Updated user details:", editedUser);
 
       setUsers(updatedUsers);
