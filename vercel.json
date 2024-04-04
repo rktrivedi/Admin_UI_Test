@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/admin/:asset*",
-      "destination": "https://admin-ui-test.vercel.app/:asset*"
-    },
-    {"source": "/(.*)", "destination": "/"}
-  ]
-}
