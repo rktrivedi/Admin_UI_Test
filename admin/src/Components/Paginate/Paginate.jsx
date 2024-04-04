@@ -9,17 +9,23 @@ import {AiOutlineDoubleLeft} from "react-icons/ai";
 
 const Pagination = ({pageCount, onPageChange, currentPage, goToLastPage}) => {
   const [isFirstPage, setIsFirstPage] = useState(currentPage === 0);
+  const [isLastPage, setIsLastPage] = useState(currentPage === pageCount - 1);
 
   useEffect(() => {
     setIsFirstPage(currentPage === 0);
-  }, [currentPage]);
+    setIsLastPage(currentPage === pageCount - 1);
+  }, [currentPage, pageCount]);
   return (
     <div className={styles.paginationContainer}>
       <button
         className={`${styles.paginationBttns} ${
           isFirstPage ? styles.disabled : ""
         }`}
-        onClick={() => onPageChange({selected: currentPage - 1})}
+        onClick={() => {
+          if (!isFirstPage) {
+            onPageChange({selected: 0}); // Move to the first page
+          }
+        }}
         disabled={isFirstPage}
       >
         <AiOutlineDoubleLeft className={styles.icon} />
@@ -31,16 +37,29 @@ const Pagination = ({pageCount, onPageChange, currentPage, goToLastPage}) => {
         onPageChange={onPageChange}
         containerClassName={styles.pagination}
         activeClassName={styles.activePage}
-        nextLabel={<IoChevronForwardOutline />}
+        nextLabel={
+          <IoChevronForwardOutline
+            className={isLastPage ? styles.disabled : styles.icon}
+          />
+        }
         forcePage={currentPage}
-        previousLabel={<IoChevronBack />}
-        // previousLabel={
-        //   <IoChevronBack className={isFirstPage ? styles.disabled : ""} />
-        // }
+        // previousLabel={<IoChevronBack />}
+        previousLabel={
+          <IoChevronBack
+            className={isFirstPage ? styles.disabled : styles.icon}
+          />
+        }
       />
       <button
-        className={styles.paginationBttns}
-        onClick={() => onPageChange({selected: pageCount - 1})}
+        className={`${styles.paginationBttns} ${
+          isLastPage ? styles.disabled : ""
+        }`}
+        onClick={() => {
+          if (!isLastPage) {
+            onPageChange({selected: pageCount - 1}); // Move to the last page
+          }
+        }}
+        disabled={isLastPage}
       >
         <AiOutlineDoubleRight className={styles.icon} />
       </button>

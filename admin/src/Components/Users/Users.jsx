@@ -5,6 +5,7 @@ import {FaSearch} from "react-icons/fa";
 import {useParams} from "react-router-dom";
 import styles from "./Users.module.css";
 import Pagination from "../Paginate/Paginate";
+import {IoMdClose} from "react-icons/io";
 import Search from "../Search/Search";
 
 const Users = () => {
@@ -158,13 +159,13 @@ const Users = () => {
               <td className={styles.btn}>
                 <button
                   onClick={() => handleEdit(user.id)}
-                  className={styles.icon}
+                  className={styles.editicon}
                 >
                   <AiFillEdit />
                 </button>
                 <button
                   onClick={() => handleDelete(user.id)}
-                  className={styles.icon}
+                  className={styles.deleteicon}
                 >
                   <AiFillDelete />
                 </button>
@@ -174,7 +175,13 @@ const Users = () => {
           {/* Modal for editing user details */}
           {editedUser && (
             <div className={styles.modal}>
-              <h2>Edit User</h2>
+              <div className={styles.modalheading}>
+                <h2>Edit User</h2>
+                <IoMdClose
+                  className={styles.closeIcon}
+                  onClick={() => setEditedUser(null)}
+                />
+              </div>
               <input
                 type="text"
                 value={editedUser.name}
@@ -196,8 +203,17 @@ const Users = () => {
                   setEditedUser({...editedUser, role: e.target.value})
                 }
               />
-              <button onClick={handleUserUpdate}>Update</button>
-              <button onClick={() => setEditedUser(null)}>Cancel</button>
+              <div className={styles.modalButton}>
+                <button onClick={handleUserUpdate} className={styles.update}>
+                  Update
+                </button>
+                <button
+                  onClick={() => setEditedUser(null)}
+                  className={styles.deleteButton}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           )}
         </tbody>

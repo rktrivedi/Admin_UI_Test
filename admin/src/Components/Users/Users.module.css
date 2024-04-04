@@ -57,12 +57,22 @@
   flex-direction: row-reverse;
   gap: 250px;
 }
-.icon {
+.editicon {
+  border: none;
+  color: #343232;
+  background-color: none;
+  cursor: pointer;
+}
+.deleteicon {
   border: none;
   color: #c82333;
   background-color: none;
+  cursor: pointer;
 }
-.icon:hover {
+.deleteicon:hover {
+  scale: 1.2;
+}
+.editicon:hover {
   scale: 1.2;
 }
 /* Modal styles */
@@ -99,4 +109,25 @@
 
 .modal button:hover {
   background-color: #0056b3;
+}
+.modalheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.closeIcon {
+  position: relative;
+  cursor: pointer;
+  margin-top: 0px;
+}
+.modalButton {
+  position: relative;
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.deleteButton {
+  border: none;
+  color: #c82333;
+  background-color: none;
+  cursor: pointer;
 }

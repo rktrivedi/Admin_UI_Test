@@ -59,10 +59,13 @@
   border: 1px solid #2896ca;
 }
 .disabled {
-  opacity: 0.5;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   cursor: not-allowed;
   background: rgb(181, 181, 181);
   color: rgb(56, 55, 55);
-  border: 2px solid rgb(56, 55, 55);
+  border: 2px solid rgb(181, 181, 181) !important;
   border: none;
+  z-index: 1;
 }
